@@ -1,0 +1,12 @@
+<html>
+<head><title>Error de Login</title></head>
+<body>							
+<fieldset id='ferror' >
+<input type="hidden" id="<VARIABLE>" value="true">
+<input type='hidden' id='ver' value='false'>										
+<legend>Error</legend>
+<P><MENSAJE></p><BR></br>
+<P ALIGN='center'>Por favor vuelva a intentar</P>
+</fieldset>
+</body>
+</html>

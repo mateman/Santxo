@@ -1,0 +1,16 @@
+<html>
+<head><title>Cambiar cuentas</title></head>
+<body>
+	<fieldset id="fedit">
+	<input type="hidden" id="<VARIABLE>" value="true">
+	<legend>Editar datos personales</legend>
+	<TABLE>
+        <TR><TH><P ALIGN="left">Nombre completo:</P></TH><TD><input type=text name="editnombre" id="editnombre" size=26 maxlength=40 value="<NOMBRE>" onBlur="vnombre(this);"></TD></TR>
+	<TR><TH><P ALIGN="left">DNI:</P></TH><TD><input type=text name="editDNI" id="editDNI" size=26 maxlength=10 value="<DNI>"onBlur="DNI(this);" onKeyUp="verifica_DNIedit(this);"></TD></TR>
+        <TR><TH><P ALIGN="left">Sector donde trabaja:</P></TH><TD><input type=text name="editsector" id="editsector" size=26 maxlength=50 value="<SECTOR>" onBlur="vsector(this);"><TD></TR>
+        <TR><TH><P ALIGN="left">Tel&eacute;fono de referencia:</P></TH><TD><input type=text name="edittel" id="edittel" size=26 maxlength=20 value="<TEL>" onBlur="vtel(this);"></TD></TR>
+	</TABLE>
+	<P><input type="button" value="Cambiar datos" id="botonedit" value="Editar Cuenta" class="formularios"	onClick="cambiar_cuenta (document.getElementById('edcuenta'), document.getElementById('editnombre'), document.getElementById('editsector'), document.getElementById('edittel'), document.getElementById('editDNI'));">
+	</fieldset>
+</body>
+</html>

@@ -1,0 +1,9 @@
+<html>
+<head></head>
+<body>
+<input type="hidden" id="<VARIABLE>" value="false">
+<input type="hidden" id="c" value="false">  		
+<input type='hidden' id='ver' value='false'>
+<P>SESSION CADUCADA!</P><P><MENSAJE></P>
+</body>
+</html>

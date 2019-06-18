@@ -1,0 +1,8 @@
+			my $dominios = $hash_registros{'dominios'};
+                        $dominios =~ s/^\s*\(//g;
+                        $dominios =~ s/\)\s*$//g;
+                        @dom = split (/,/,$dominios);
+			my $dominio = (split(/=/,$dom[0]))[0];
+
+
+

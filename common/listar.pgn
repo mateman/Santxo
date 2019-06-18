@@ -1,0 +1,13 @@
+<html>
+<head><title>Listar cuentas</title></head>
+<body>
+<input type="hidden" id="valido" value="true">
+<fieldset id='flistar'>
+<legend>Cuentas de correo</legend><BR>
+<table border=2 >
+<TR><TH><CUENTA></TH><TD><IMG SRC='<PATH>/rename.png' ALT='Editar Cuenta' onDblClick="document.getElementById('edcuenta').value='<CUENTA>';document.getElementById('editnewsecreto').value='';document.getElementById('editsecreto').value='';MostrarDiv('diveditar');document.getElementById('edi').disabled=false;"></TD><TD><IMG SRC='<PATH>/delete.png' ALT='Borrar Cuenta' onDblClick="document.getElementById('borracuenta').value='<CUENTA>';MostrarDiv('divborrar');document.getElementById('botonborrar').disabled=false;"></TD><TD><NOMBRE></TD><TD><DNI></TD><TD><SECTOR></TD><TD><TEL></TD></TR>
+</table>
+</fieldset>
+</form>
+</body>
+</html>

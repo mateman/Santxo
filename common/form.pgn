@@ -1,0 +1,157 @@
+<!-- HTML para crear/borrar usuarios de mail en <DOMINIO> -->
+<!-- Hecho por Pablo Adolfo Cuyeu cuyeu@gob.gba.gov.ar -->
+<html>
+<head>
+<title>Crear cuenta de correo</title>
+<script src="../../santxo/js/divmanager.js"></script>
+<script src="../../santxo/js/funciones.js"></script>
+<script src="../../santxo/js/funciones-ajax.js"></script>
+<script language="JavaScript">
+<!--
+// Validacion antes del envio a crear una cuenta
+function vtodo(){
+if ((document.getElementById('cuenta').value == '') || (document.getElementById('nombre').value == '') || (document.getElementById('sector').value == '') || (document.getElementById('tel').value == '') || (document.getElementById('DNI').value == '') ||(document.getElementById('secreto').value == '')|| (document.getElementById('newsecreto').value == '')) 
+	{
+	  alert('Datos incompletos en la forma, todos los campos son requeridos');
+	  return false;
+	 }	
+	else {crear_cuenta (document.getElementById('cuenta'), document.getElementById('nombre'), document.getElementById('sector'), document.getElementById('tel'), document.getElementById('DNI'), document.getElementById('secreto'), document.getElementById('newsecreto'));
+			return true;}
+		 }
+
+//-->
+</script>
+<LINK REL="stylesheet" TYPE="text/css" HREF="../../santxo/css/divstyle.css">
+</head>
+<BODY bgcolor=<COLOR>>	
+<DIV id="santxo" name="santxo">
+<!-- <IMG SRC='../../santxo/imagenes/quijote.png'> -->
+<IMG width='70%' SRC='../../santxo/imagenes/molinos.png'>
+</DIV>
+<DIV id="botones" name='botones' align="center">
+	<BR>
+	<input type="hidden" id="sessionval" value="<SESSION>">
+	<input type="button" name="crear"   id="crear" value="Crear Cuenta" class="formularios" onClick="MostrarDiv('divcrear')"><BR><BR></br>
+	<input type="button" name="borrar"  id="borrar" value="Borrar Cuenta" class="formularios"	onClick="document.getElementById('borracuenta').value='';MostrarDiv('divborrar');document.getElementById('botonborrar').disabled=true;"><BR><BR></br>
+	<input type="button" name="editar"  id="editar" value="Editar Cuenta" class="formularios"	onClick="document.getElementById('edcuenta').value='';document.getElementById('edcuenta').disabled=false;document.getElementById('editnewsecreto').value='';document.getElementById('editsecreto').value='';MostrarDiv('diveditar');document.getElementById('edi').disabled=true;"><BR><BR></br>
+	<input type="button" name="copiar"  id="copiar" value="Copiar Cuenta" class="formularios"	onClick="document.getElementById('sourcecuenta').value='';document.getElementById('sourcehost').value='';document.getElementById('destinocuenta').value='';document.getElementById('destinohost').value='';document.getElementById('botoncopiar').disabled=true;MostrarDiv('divcopiar');"><BR><BR></br>
+	<input type="button" name="listar"  id="listar" value="Listar Cuentas" class="formularios"	onClick="document.getElementById('edcuenta').disabled=false;MostrarLista();"><BR><BR></br>
+	<input type="button" name="salir"  id="salir" value="Cerrar" class="formularios"	onClick="Salir()"><BR><BR></br>	
+</DIV>
+
+<DIV id="divdominio" name='divdominio' align="left">			
+	<fieldset id="fdominio">
+	<legend>Seleccionar Dominio</legend>
+	<SELECTDOMINIO>
+	</fieldset>
+</DIV>
+
+<DIV id="divcrear" name='divcrear' align="left">			
+	<fieldset id="fcrear">
+	<legend>Crear cuenta de correo</legend><BR>
+	<TABLE>
+	<TR><TH><P ALIGN="left">Nombre de cuenta: </P></TH><TD><input type=text name="cuenta" id="cuenta" size=12 maxlength=30 onBlur="vcuenta(this);" onKeyUp="verifica_cuenta(this);"><A id='cdomi'>@<DOMINIO></A></TD></TR>
+	<TR><TH><P ALIGN="left">Nombre completo:</P></TH><TD><input type=text name="nombre" id="nombre" size=26 maxlength=45 onBlur="vnombre(this);"></TD></TR>
+	<TR><TH><P ALIGN="left">DNI:</P></TH><TD><input type=text name="DNI" id="DNI" size=26 maxlength=10 onBlur="DNI(this);" onKeyUp="verifica_DNI(this);"></TD></TR>
+	<TR><TH><P ALIGN="left">Sector donde trabaja:</P></TH><TD><input type=text name="sector" id="sector" size=26 maxlength=50 onBlur="vsector(this);"><TD></TR>
+	<TR><TH><P ALIGN="left">Tel&eacute;fono de referencia:</P></TH><TD><input type=text name="tel" id="tel" size=26 maxlength=20 onBlur="vtel(this);"></TD></TR>
+	</TABLE>
+	<BR>
+	<TABLE>
+	<TR><TH><P ALIGN="left">Introduzca la contrase&ntilde;a:</P></TH><TD><input type=password id="secreto" name="secreto" size=10 maxlength=40 ></TD></TR>	
+	<TR><TH><P ALIGN="left">Vuelva a escribirla:</P></TH><TD><input type=password id="newsecreto" name="newsecreto" size=10 maxlength=40 onBlur="vpasswd(secreto, newsecreto)"></TD></TR>
+	</TABLE>
+	<BR>
+	<P><input type="button" value="Crear la cuenta" id="botoncrearcuenta" class="formularios"	onClick="vtodo();">
+	<P><input type="button" value="Volver a empezar" id="botonvempezar" class="formularios"	onClick="vempezar();">
+	</fieldset>
+</DIV>
+
+
+<DIV id="divborrar" name='divborrar' align="left">
+	<fieldset id="fborrar">
+	<legend>Borrar cuenta de correo</legend><BR>
+	<TABLE>
+	<TR><TH><P ALIGN="left">Nombre de cuenta: </P></TH><TD><input type=text name='borracuenta' id='borracuenta' size=12 maxlength=30 onKeyUp="vcuenta(this);mostrarDatos(this);" ><A id='bdomi'>@<DOMINIO></A></TD><TD><input type="button" id="botonborrar" value="Borrar la cuenta" class="formularios" onClick="delete_cuenta(document.getElementById('borracuenta'));"></TD></TR>
+	</TABLE>
+	<BR>
+	</fieldset>
+	<DIV id='divb' name='divb' align="left">			
+	
+	</DIV>
+</DIV>
+
+<DIV id="diveditar" name='diveditar' align="left">			
+	<fieldset id="feditar">
+	<legend>Editar cuenta de correo</legend><BR>
+	<TABLE>
+	<TR><TH><P ALIGN="left">Nombre de cuenta: </P></TH><TD><input type=text name='edcuenta' id='edcuenta' size=12 maxlength=30 onKeyUp="vcuenta(this);verifica_editar(this);"><A id='edomi'>@<DOMINIO></A></TD><TD><input type="button" name="edi"  id="edi" value="Editar Cuenta" class="formularios"	onClick="MostrarEdit();document.getElementById('bclave').disabled=true; buscar('divedit','divclave');document.getElementById('edcuenta').disabled=true;"></TD></TR>
+	</TABLE>
+	<BR>
+	</fieldset>
+	<DIV id="divedit" name='divedit' align="left">			
+	
+	</DIV>
+
+
+	<DIV id="divclave" name='divclave' align="left">			
+	<fieldset id="fclave">
+	<legend>Cambio de clave</legend><BR>
+	<TABLE>
+	<TR><TH><P ALIGN="left">Introduzca la contrase&ntilde;a:</P></TH><TD><input type=password name=secreto id="editsecreto" size=10 maxlength=40 ></TD></TR>	
+	<TR><TH><P ALIGN="left">Vuelva a escribirla:</P></TH><TD><input type=password name=newsecreto id="editnewsecreto" size=10 maxlength=40 onBlur="vpasswd(document.getElementById('editsecreto') , document.getElementById('editnewsecreto'));"></TD></TR>
+	</TABLE>
+	<P><input type="button" name='bclave'  id='bclave' value="Cambiar clave" class="formularios"	onClick="chpass(document.getElementById('editsecreto') , document.getElementById('editnewsecreto'));"> 
+	</fieldset>
+	</DIV>
+</DIV>
+
+
+<DIV id="divcopiar" name='divcopiar' align="left">
+	<fieldset id="fcopiar">
+	<legend>Copiar contenido de cuenta de correo a otra cuenta</legend><BR>
+	<TABLE>
+	<TR><TH><P ALIGN="left">Cuenta origen: </P></TH><TD><input type=text name='sourcecuenta' id='sourcecuenta' size=12 maxlength=30 onKeyUp="vcuenta(this);setbotoncopiar();" >@<input type=text name='sourcehost' id='sourcehost' size=16 maxlength=30 onKeyUp="vcuenta(this);setbotoncopiar();" ></TD><TD><P ALIGN="left">password: </P><TD><input type=password name='sourcepass' id='sourcepass' size=12 maxlength=30 onKeyUp="setbotoncopiar();" ></TD></TR>
+	<TR></TR>	
+	<TR><TH><P ALIGN="left">Cuenta destino: </P></TH><TD><input type=text name='destinocuenta' id='destinocuenta' size=12 maxlength=30 onKeyUp="vcuenta(this);setbotoncopiar();" >@<input type=text name='destinohost' id='destinohost' size=16 maxlength=30 onKeyUp="vcuenta(this);setbotoncopiar();" ></TD><TD><P ALIGN="left">password: </P><TD><input type=password name='destinopass' id='destinopass' size=12 maxlength=30 onKeyUp="setbotoncopiar();" ></TD></TR>	
+	</TABLE>
+	<BR><BR>	
+	<input type="button" id='botoncopiar' value="Copiar la cuenta" class="formularios" onClick="copiar_cuenta(document.getElementById('sourcecuenta'), document.getElementById('sourcehost'), document.getElementById('sourcepass'), document.getElementById('destinocuenta'), document.getElementById('destinohost') , document.getElementById('destinopass'));">	
+	<BR>
+	</fieldset>
+</DIV>
+
+
+<DIV id="divlistar" name='divlistar' align="left">			
+	<fieldset id="flistar">
+	<legend>Cuentas de correo</legend><BR>
+	<TABLE>
+	</TABLE>
+	<input type="button" name="listar"  id="listar" value="Listar Cuentas" class="formularios"	onClick="MostrarLista();"><BR><BR></br>
+	</fieldset>
+</DIV>
+
+<DIV id="espera" name="espera" align="center">
+	<TABLE width="16%" border="0">
+	<TR><TD width="28%"><IMG SRC="../../santxo/imagenes/espera.gif"></TD>
+		 <TD width="72%"><I><B>Cargando...<B><BR></I></TD>
+	</TR>
+	</TABLE>			
+</DIV>
+<DIV id="divmensaje" name='divmensaje' align="center">
+
+</DIV>
+
+
+<DIV id="divsession" name='divsession' align="center">
+<fieldset id="fsession">
+<P ALIGN="center">Su sesi&oacute;n </P>
+<P ALIGN="center">ha caducado </P>
+<P ALIGN="center">Por FAVOR vuelva a loguearse</P>
+</fieldset>
+</DIV>
+
+
+</body>
+</html>
+<!-- Fin del documento -->

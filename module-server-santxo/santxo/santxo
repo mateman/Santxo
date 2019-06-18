@@ -1,0 +1,38 @@
+#!/usr/bin/perl 
+
+use POSIX qw(setsid);
+use IO::Socket;
+ $sock = new IO::Socket::INET (LocalHost => 'dominio1.com.ar',
+                               LocalPort => 1234,
+                               Proto     => 'tcp',
+                               Listen    =>  6,
+                               Reuse     => 1
+                               )    ;
+   die "No se ha podido crear el socket: $!\n" unless $sock;
+umask 0;
+open STDIN, '/dev/null' or die "Can't read /dev/null: $!";
+open STDOUT, '>>/santxo/santxo.log' or die "Can't write to /dev/null: $!";
+open STDERR, '>>/santxo/santxo.error' or die "Can't write to /dev/null: $!";
+defined(my $pid = fork) or die "Can't fork: $!";
+exit if $pid;
+setsid or die "Can't start a new session: $!";
+while (my  $conexion= $sock -> accept() ) { #Ahora aceptamos las conexiones
+		$conexion->autoflush(1);   
+		$conexion->send("Welcome to Santxo\n\r"); # mensaje que enviaremos
+																# usando send
+		recv($conexion, $comando,256,undef); #recibimos el comando con parametros
+														 #y lo metemos en $comando este mide a lo sumo 30 caracteres
+		my @comandos =split(/\s/,$comando);	 # armamos un arreglo con las partes del comando
+		$prog = "/santxo/".$comandos[0]; #compongo al comando con el path donde estara para ejecutarse
+		print $comando."\n";
+		if (-e $prog ) {											  #si existe se cumple la condicion y entra al if
+      			$resultado =`/santxo/$comando`;
+					open (LOGS,">> /santxo/santxo.log");
+					$date = `/bin/date`;
+					$date =~ s/\n//g;				
+					print (LOGS $date." : ".$_."\n");
+					close (LOGS);
+			};		
+		print $conexion $resultado."\n"; #enviamos con print
+		}
+close ($conexion); #bye bye

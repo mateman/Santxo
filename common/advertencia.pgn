@@ -1,0 +1,9 @@
+<html>
+<head></head>
+<body>
+<P>ADVERTENCIA !</P><P><MENSAJE></P>
+<input type="hidden" id="<VARIABLE>" value="true">
+<input type="hidden" id="c" value="true">
+<input type="hidden" id="valido" value="true">
+</body>
+</html

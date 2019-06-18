@@ -1,0 +1,17 @@
+<html>
+<head><title>Cambiar cuentas</title></head>
+<body>	
+	<fieldset id="fborrar">
+	<input type="hidden" id="<VARIABLE>" value="true">	
+	<input type="hidden" id="ver" value="true">
+	<legend>Editar datos personales</legend>
+	<TABLE>
+	<TR><TH><P ALIGN="left">Nombre completo:</P></TH><TD><P ALIGN="left"><NOMBRE></P></TD></TR>
+	<TR><TH><P ALIGN="left">DNI:</P></TH><TD><P ALIGN="left"><DNI></P></TD></TR>
+	<TR><TH><P ALIGN="left">Sector donde trabaja:</P></TH><TD><P ALIGN="left"><SECTOR></P><TD></TR>
+	<TR><TH><P ALIGN="left">Tel&eacute;fono de referencia:</P></TH><TD><P ALIGN="left"><TEL></P></TD></TR>
+
+	</TABLE>
+	</fieldset>
+</body>
+</html>

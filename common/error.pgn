@@ -1,0 +1,13 @@
+<html>
+<head><title>Error de Login</title>
+<style type='text/css'>
+#error {position:absolute;left:280px;top:100px;width:400px; height:150px; border: 1px solid #000000;}			
+</style></head>
+<body bgcolor=<COLOR> >							
+<fieldset id='error' >
+<legend>Error</legend>
+<P>Puede que haya ingresado mal su clave o el nombre de su cuenta</p><BR></br>
+<P ALIGN='center'>Por favor vuelva a intentar</P>
+</fieldset>
+</body>
+</html>

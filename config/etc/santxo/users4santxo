@@ -1,0 +1,31 @@
+#!/usr/bin/perl
+if (! scalar @ARGV ) {
+  print "Usage: user4santxo user password passwordfile\n";
+  print "(this program automatically creates the pw file if needed.)\n";
+  exit 0;
+};
+$file = `/bin/cat /etc/santxo.cfg |/bin/grep home `;
+@h = split(/:/,$file);
+$file = `/bin/cat /etc/santxo.cfg |/bin/grep login `;
+@l = split(/:/,$file);
+$host = $h[1];
+$host =~ s/\n//g;
+$login = $l[1];
+$login =~ s/\n//g;
+#$outf= $host."/". $login;
+$user=$ARGV[0];
+$passwd=$ARGV[1];
+
+if ($user && $passwd) {
+  $encrypted = crypt($passwd, $user);
+  if (-f $login) { 
+    open(OUT, ">>$login") || die "user4santxo error: $!\n";  
+  } else {
+    open(OUT, ">$login") || die "user4santxo error: $!\n";
+  }
+  print OUT "$user:$encrypted\n";
+  print "Ususario $user agregado exitosamente\n" ;
+  close(OUT);
+  
+  exit 0;
+}

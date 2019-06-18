@@ -1,0 +1,66 @@
+#! /bin/bash
+#
+# santxo          Start/Stop the santxo daemon.
+#
+# description: The Santxo daemon for mail users
+# processname: santxo
+# pidfile: /var/run/santxo.pid
+
+# Source function library.
+. /etc/init.d/functions
+
+RETVAL=0
+
+# See how we were called.
+  
+prog="santxo"
+
+start() {
+	echo -n $"Starting $prog: "
+	daemon /santxo/santxo
+	RETVAL=$?
+	echo
+	[ $RETVAL -eq 0 ] && touch /var/lock/subsys/santxo
+	return $RETVAL
+}
+
+stop() {
+	echo -n $"Stopping $prog: "
+	killproc /santxo/santxo
+	RETVAL=$?
+	echo
+	[ $RETVAL -eq 0 ] && rm -f /var/lock/subsys/santxo
+	return $RETVAL
+}	
+
+rhstatus() {
+	status /santxo/santxo
+}	
+
+restart() {
+  	stop
+	start
+}	
+
+case "$1" in
+  start)
+  	start
+	;;
+  stop)
+  	stop
+	;;
+  restart)
+  	restart
+	;;
+  status)
+  	rhstatus
+	;;
+  condrestart)
+  	[ -f /var/lock/subsys/crond ] && restart || :
+	;;
+  *)
+	echo $"Usage: $0 {start|stop|status|reload|restart|condrestart}"
+	exit 1
+esac
+
+exit $?

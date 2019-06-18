@@ -1,0 +1,9 @@
+<html>
+<head></head>
+<body>
+<P>ERROR! </P><P><MENSAJE></P> 
+<input type="hidden" id="<VARIABLE>" value="true">
+<input type="hidden" id="valido" value="true">
+<input type="hidden" id="c" value="false">
+</body>
+</html>
